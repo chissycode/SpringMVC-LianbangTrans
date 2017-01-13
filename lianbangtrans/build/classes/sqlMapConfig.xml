@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE configuration
+PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-config.dtd">
+
+<configuration>
+	<!-- 起别名 
+	<typeAliases>
+		<typeAlias type="com.mybatis.demo.entity.Student" alias="Student"/>
+	</typeAliases>-->
+	
+	<!-- 配置数据源，事务 -->
+	<environments default="test">
+		<environment id="test">
+			<!-- 事务：JDBC/MANAGED-自己管理去 -->
+			<transactionManager type="JDBC"/>
+			<!-- 数据源：POOLED/UNPOOLED/JNDI -->
+			<dataSource type="POOLED">
+				<property name="driver" value="com.mysql.jdbc.Driver"/>
+				<property name="url" value="jdbc:mysql://localhost:3306/lianbang?charsetEncoding=utf8"/>
+				<property name="username" value="root"/>
+				<property name="password" value="root"/>
+			</dataSource>
+		</environment>
+	</environments>
+	
+	<!-- 映射文件mapper -->
+	<mappers>
+		<mapper resource="com/lianbang/entity/mapper/UserMapper.xml"/>
+	
+		<mapper resource="com/lianbang/entity/mapper/MissCityMapper.xml"/>
+		<mapper resource="com/lianbang/entity/mapper/OrderMapper.xml"/>
+		<mapper resource="com/lianbang/entity/mapper/CityMapper.xml"/>
+	</mappers>
+</configuration>

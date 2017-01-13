@@ -1,0 +1,29 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 配置命名空间，区别名称 -->
+<mapper namespace="missCity">
+	
+	<!-- 中间，对象的属性和结果集的字段之间的对应关系 -->
+	<resultMap type="com.lianbang.entity.MissCity" id="missCityRM">
+		<!-- 主键映射 -->
+		<id property="missNum" column="Miss_Num" />
+		<id property="cityNum" column="City_Num" />
+		<!-- 普通字段 property指实体的属性；column结果集的字段名称 -->
+		<result property="mcTime" column="MC_Time" />
+		<result property="mcDis" column="MC_Dis" />
+	</resultMap>
+
+	
+	<!-- 查询，注意Mybatis中如果有填写集合类型，只填写集合中元素的类型 -->
+	<select id="findCityNum" parameterType="int" resultMap="missCityRM">
+		select
+		*
+		from mission_city 
+		where Miss_Num = #{missNum}
+	</select>
+	
+	
+
+</mapper>

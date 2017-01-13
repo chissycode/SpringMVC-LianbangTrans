@@ -1,0 +1,76 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 配置命名空间，区别名称 -->
+<mapper namespace="order">
+	
+	<!-- 中间，对象的属性和结果集的字段之间的对应关系 -->
+	<resultMap type="com.lianbang.entity.Order" id="orderRM">
+		<!-- 主键映射 -->
+		<id property="orderNum" column="Order_Num" />
+		<!-- 普通字段 property指实体的属性；column结果集的字段名称 -->
+		<result property="userNum" column="User_Num" />
+		<result property="missNum" column="Miss_Num" />
+		<result property="orderReceiver" column="Order_Receiver" />
+		<result property="orderV" column="Order_V" />
+		<result property="orderW" column="Order_W" />
+		<result property="orderOriPlace" column="Order_OriPlace" />
+		<result property="orderDes" column="Order_Des" />
+		<result property="orderState" column="Order_State" />
+		<result property="orderUserCom" column="Order_UserCom" />
+		<result property="orderTime" column="Order_Time"/>
+		<result property="orderCity" column="Order_City" />
+		<result property="rectel" column="Rec_Tel" />
+	</resultMap>
+	
+	<!-- 查询，注意Mybatis中如果有填写集合类型，只填写集合中元素的类型 -->
+	<select id="findsendlist" parameterType="int" resultMap="orderRM">
+		SELECT *
+        FROM orderinfo
+        WHERE orderinfo.User_Num=#{value} AND orderinfo.Order_State=1
+	</select>
+	
+	<select id="findreceivelist" parameterType="int" resultMap="orderRM">
+		SELECT *
+        FROM orderinfo
+        WHERE orderinfo.User_Num=#{value} AND orderinfo.Order_State=2
+	</select>
+	<select id="findsendOne" parameterType="int" resultMap="orderRM">
+		SELECT *
+        FROM orderinfo
+        WHERE orderinfo.User_Num=#{value}   AND orderinfo.Order_State=1
+	</select>
+	
+	<select id="findaccomplishlist" parameterType="int" resultMap="orderRM">
+		SELECT *
+        FROM orderinfo
+        WHERE orderinfo.User_Num=#{value} AND orderinfo.Order_State=3
+	</select>
+	<insert id="insert" parameterType="map">
+		INSERT INTO
+		orderinfo(User_Num,Order_Receiver,Rec_Tel,Order_City,Order_Time,Order_Des)
+		Values
+		(#{userNum},#{orderReceiver},#{rectel},#{orderCity},#{orderTime},#{orderDes})
+
+	</insert>
+	
+	<select id="findOrderNum" parameterType="map" resultMap="orderRM">
+		select
+		*
+		from
+		orderinfo
+		where Order_Num = #{orderNum}
+	</select>
+<update id="updatePing" parameterType="Map">
+		UPDATE
+		orderinfo
+		SET
+		Order_UserCom = #{orderUserCom}
+		WHERE
+		orderinfo.Order_Num = #{orderNum}
+		
+
+	</update>
+	
+</mapper>

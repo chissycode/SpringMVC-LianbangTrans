@@ -1,0 +1,46 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 配置命名空间，区别名称 -->
+<mapper namespace="city">
+	
+	<!-- 中间，对象的属性和结果集的字段之间的对应关系 -->
+	<resultMap type="com.lianbang.entity.City" id="cityRM">
+		<!-- 主键映射 -->
+		
+		<id property="cityNum" column="City_Num" />
+		<!-- 普通字段 property指实体的属性；column结果集的字段名称 -->
+		<result property="cityName" column="City_Name" />
+		<result property="cityLine" column="City_Line" />
+		<result property="cityDis" column="City_Dis" />
+		<result property="cityTime" column="City_Date" />
+		<!-- <result property="cityDate" column="City_Date" /> -->
+		
+		
+
+	</resultMap>
+
+	
+	<!-- 查询，注意Mybatis中如果有填写集合类型，只填写集合中元素的类型 -->
+	<select id="findCityName" parameterType="Map" resultMap="cityRM">
+			SELECT *
+			FROM
+				cityinfo
+			WHERE
+				cityinfo.City_Num &lt;= #{cityNum} AND
+				cityinfo.City_Line = #{cityLine}
+
+	</select>
+	
+	<select id="findCityLine" parameterType="Map" resultType="int">
+			SELECT City_Line
+			FROM
+				cityinfo
+			WHERE
+				cityinfo.City_Num = #{cityNum}
+
+	</select>
+	
+
+</mapper>

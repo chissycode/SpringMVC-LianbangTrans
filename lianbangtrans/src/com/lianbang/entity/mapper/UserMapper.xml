@@ -1,0 +1,59 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<!-- 配置命名空间，区别名称 -->
+<mapper namespace="user">
+	
+	<!-- 中间，对象的属性和结果集的字段之间的对应关系 -->
+	<resultMap type="com.lianbang.entity.User" id="userRM">
+		<!-- 主键映射 -->
+		<id property="num" column="User_Num" />
+		<!-- 普通字段 property指实体的属性；column结果集的字段名称 -->
+		<result property="name" column="User_Name" />
+		<result property="tel" column="User_Tel" />
+		<result property="key" column="User_Key" />
+		<result property="confkey" column="User_ConfKey" />
+		<result property="cardid" column="User_CardID" />
+		<result property="mail" column="User_Mail" />
+		<result property="userAddress" column="User_Address"/>
+	</resultMap>
+	
+	<!-- 查询，注意Mybatis中如果有填写集合类型，只填写集合中元素的类型 -->
+	<select id="find" parameterType="map" resultMap="userRM">
+		select
+		*
+		from userinfo 
+	</select>
+	
+	<insert id="insert" parameterType="com.lianbang.entity.User">
+	insert into userinfo(
+	User_Name,
+	User_Tel,
+	User_Key,
+	User_ConfKey,
+	User_CardID,
+	User_Mail,
+	User_Address) 
+	values(#{name},#{tel},#{key},#{confkey},#{cardid},#{mail},#{userAddress})
+    </insert>
+    
+    <select id="selectuser" parameterType="String" resultMap="userRM">
+    SELECT
+    *
+    FROM
+    userinfo
+    WHERE
+    User_Name = #{name}
+    </select>
+    
+    <select id="findUser" parameterType="Int" resultMap="userRM">
+    SELECT
+    *
+    FROM
+    userinfo
+    WHERE
+    User_Num = #{name}
+    </select>
+    
+</mapper>

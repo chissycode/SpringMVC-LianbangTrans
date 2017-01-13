@@ -1,0 +1,14 @@
+.fontnew {
+	font-family: "Helvetica Neue";
+	font-size: 12px;
+	font-style: normal;
+	color: #333;
+    font-weight:bold;
+}
+
+.fontnew-big{
+    font-family:"Helvetica Neue";
+	font-size:25px;
+	font-style:normal;
+	color:#333;
+}

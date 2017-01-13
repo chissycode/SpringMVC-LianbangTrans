@@ -1,0 +1,36 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc
+						http://www.springframework.org/schema/mvc/spring-mvc-3.2.xsd
+						http://www.springframework.org/schema/beans
+						http://www.springframework.org/schema/beans/spring-beans-3.2.xsd
+						http://www.springframework.org/schema/context
+          				http://www.springframework.org/schema/context/spring-context-3.2.xsd">
+
+	<!-- 到com.tosit.helloworld.web去扫描组件 -->
+	<context:component-scan base-package="com.tosit.lol"/>
+	
+	<!-- 映射静态资源,避免spring mvc过多处理，浪费时间，提升效率 -->
+	<mvc:resources location="/img/" mapping="/img/**"/>
+	<mvc:resources location="/css/" mapping="/css/**"/>
+	<mvc:resources location="/js/" mapping="/js/**"/>
+	<mvc:resources location="/" mapping="**.html"/>
+	
+	<!-- 打开spring mvc注解驱动 -->
+	<mvc:annotation-driven/>
+	
+	<!-- 内部资源视图解析器 -->
+	<bean id="internalResourceViewResolver" class="org.springframework.web.servlet.view.InternalResourceViewResolver">
+		<property name="prefix" value="/"/>
+		<property name="suffix" value=".jsp"/>
+	</bean>
+	
+	<!-- 文件上传解析器 id 必须为multipartResolver -->
+	<bean id="multipartResolver" class="org.springframework.web.multipart.commons.CommonsMultipartResolver">
+		<property name="maxUploadSize" value="6000000"/>
+	</bean>
+
+</beans>
